@@ -21,7 +21,7 @@ class ChatGPTService {
       model: 'gpt-4o-mini',
       messages: messages,
       temperature: 1,
-      max_tokens: 1600,
+      max_tokens: 1400,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,

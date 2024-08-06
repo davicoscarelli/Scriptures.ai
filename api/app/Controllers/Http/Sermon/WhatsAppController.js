@@ -13,7 +13,9 @@ class WhatsAppController {
       const reply = await MessageProcessorService.processMessage(from, incomingMessage)
 
       // Send the response back to the user
-      await WhatsAppService.sendMessage(from, reply)
+
+      const constrainedReply = reply.slice(0, 1500);
+      await WhatsAppService.sendMessage(from, constrainedReply)
 
       response.status(200).send()
     } catch (error) {

@@ -19,7 +19,7 @@ class MessageProcessorService {
       if (message.trim() === '1') {
         // Start the sermon draft process
         this.setUserState(from, 'awaiting_topic')
-        return 'Indique o tema do seu sermão:'
+        return 'Indique o tema do seu devocional '
       }
 
       return this.getMenu()
@@ -30,7 +30,7 @@ class MessageProcessorService {
   }
 
   static getMenu() {
-    return 'Bem-vindo ao Sermon Bot!\n\nPor favor, escolha uma opção:\n1. Esboço de Sermão\n\nDigite o número de sua escolha.'
+    return 'Bem-vindo ao Devocional Bot!\n\nPor favor, escolha uma opção:\n1. Esboço de Devocional\n\nDigite o número de sua escolha.'
   }
 
   static isAwaitingDetails(from) {
@@ -44,13 +44,13 @@ class MessageProcessorService {
       if (userState === 'awaiting_topic') {
         this.setUserDetail(from, 'topic', message)
         this.setUserState(from, 'awaiting_theme')
-        return 'Indique o tema do seu sermão:'
+        return 'Indique o tema do seu devocional '
       }
 
       if (userState === 'awaiting_theme') {
         this.setUserDetail(from, 'theme', message)
         this.setUserState(from, 'awaiting_scriptures')
-        return 'Indique as escrituras para o seu sermão (separadas por vírgulas):'
+        return 'Inclua as escrituras de sua preferência para o devocional (separadas por vírgulas, opicional):'
       }
 
       if (userState === 'awaiting_scriptures') {
@@ -60,7 +60,7 @@ class MessageProcessorService {
         const { topic, theme, scriptures } = userDetails[from]
         const sermonDraft = await ChatGPTService.createSermonDraft(topic, theme, scriptures)
         const cleanedDraft = sermonDraft.replace(/\*\*/g, '*');
-        return `Aqui está o esboço do sermão:\n\n${cleanedDraft}`;
+        return `Aqui está o esboço do devocional \n\n${cleanedDraft}`;
       }
 
       return 'Comece por escrever "menu".'

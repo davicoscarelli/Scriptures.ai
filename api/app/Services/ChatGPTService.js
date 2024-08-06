@@ -13,7 +13,7 @@ class ChatGPTService {
       },
       {
         role: 'user',
-        content: `Crie um Devocional evangelico com menos de 1500 caracteres sobre o tópico "${topic}" com o tema "${theme}". Inclua as seguintes escrituras: ${scriptures}.`,
+        content: `Crie um Devocional evangelico com menos de 1350 caracteres sobre o tópico "${topic}" com o tema "${theme}". Inclua as seguintes escrituras: ${scriptures}.`,
       },
     ]
 

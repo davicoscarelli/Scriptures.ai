@@ -15,7 +15,7 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
-
+Route.post('/sermon/create', 'Sermon/SermonController.create')
 
 Route.group(() => {
     Route.post('whatsapp', 'Whatsapp/WhatsAppController.webhook').as('whatsapp.webhook')

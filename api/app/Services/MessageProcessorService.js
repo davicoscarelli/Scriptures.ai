@@ -1,5 +1,4 @@
 const ChatGPTService = use('App/Services/ChatGPTService')
-const WhatsAppService = use('App/Services/WhatsAppService')
 const Logger = use('Logger')
 
 // Simple in-memory store for user states and details (for prototyping)

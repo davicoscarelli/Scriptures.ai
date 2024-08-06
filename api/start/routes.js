@@ -18,6 +18,6 @@ const Route = use('Route')
 Route.post('/sermon/create', 'Sermon/SermonController.create')
 
 Route.group(() => {
-    Route.post('whatsapp', 'Whatsapp/WhatsAppController.webhook').as('whatsapp.webhook')
+    Route.post('whatsapp', 'WhatsApp/WhatsAppController.webhook').as('whatsapp.webhook')
 
 }).prefix("v1/webhook")

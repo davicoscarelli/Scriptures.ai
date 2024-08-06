@@ -15,7 +15,7 @@ class WhatsAppController {
       // Send the response back to the user
       await WhatsAppService.sendMessage(from, reply)
 
-      response.status(200).send('Message processed')
+      response.status(200).send()
     } catch (error) {
       Logger.error('Error in WhatsAppController webhook: %j', error)
       response.status(500).send('Internal Server Error')

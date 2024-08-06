@@ -6,6 +6,8 @@ class WhatsAppController {
     const incomingMessage = request.input('Body')
     const from = request.input('From').replace('whatsapp:', '')
 
+    console.log("Incoming message from", from, ":", incomingMessage)
+
     // Process the incoming message
     const reply = await MessageProcessorService.processMessage(from, incomingMessage)
 

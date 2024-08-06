@@ -19,18 +19,18 @@ class MessageProcessorService {
       if (message.trim() === '1') {
         // Start the sermon draft process
         this.setUserState(from, 'awaiting_topic')
-        return 'Please provide the topic for your sermon:'
+        return 'Indique o tema do seu sermão:'
       }
 
       return this.getMenu()
     } catch (error) {
       Logger.error('Error in MessageProcessorService processMessage: %j', error)
-      return 'There was an error processing your request. Please try again.'
+      return 'Ocorreu um erro ao processar o seu pedido. Por favor, tente novamente.'
     }
   }
 
   static getMenu() {
-    return 'Welcome to the Sermon Bot!\n\nPlease choose an option:\n1. Sermon Draft\n\nType the number of your choice.'
+    return 'Bem-vindo ao Sermon Bot!\n\nPor favor, escolha uma opção:\n1. Esboço de Sermão\n\nDigite o número de sua escolha.'
   }
 
   static isAwaitingDetails(from) {
@@ -44,13 +44,13 @@ class MessageProcessorService {
       if (userState === 'awaiting_topic') {
         this.setUserDetail(from, 'topic', message)
         this.setUserState(from, 'awaiting_theme')
-        return 'Please provide the theme for your sermon:'
+        return 'Indique o tema do seu sermão:'
       }
 
       if (userState === 'awaiting_theme') {
         this.setUserDetail(from, 'theme', message)
         this.setUserState(from, 'awaiting_scriptures')
-        return 'Please provide the scriptures for your sermon (comma-separated):'
+        return 'Indique as escrituras para o seu sermão (separadas por vírgulas):'
       }
 
       if (userState === 'awaiting_scriptures') {
@@ -60,13 +60,13 @@ class MessageProcessorService {
         const { topic, theme, scriptures } = userDetails[from]
         const sermonDraft = await ChatGPTService.createSermonDraft(topic, theme, scriptures)
         const cleanedDraft = sermonDraft.replace(/\*\*/g, '*');
-        return `Here is your sermon draft:\n\n${cleanedDraft}`;
+        return `Aqui está o esboço do sermão:\n\n${cleanedDraft}`;
       }
 
-      return 'Please start by typing "menu".'
+      return 'Comece por escrever "menu".'
     } catch (error) {
       Logger.error('Error in MessageProcessorService handleSermonDetails: %j', error)
-      return 'There was an error processing your request. Please try again.'
+      return 'Ocorreu um erro ao processar o seu pedido. Por favor, tente novamente.'
     }
   }
 

@@ -9,11 +9,11 @@ class ChatGPTService {
     const messages = [
       {
         role: 'system',
-        content: 'You are a helpful assistant for sermon creation.',
+        content: 'Você é um assistente útil para a criação de sermões.',
       },
       {
         role: 'user',
-        content: `Create a sermonunder 1600 characters on the topic "${topic}" with the theme "${theme}". Include the following scriptures: ${scriptures}.`,
+        content: `Crie um sermão evangelico com menos de 1600 caracteres sobre o tópico "${topic}" com o tema "${theme}". Inclua as seguintes escrituras: ${scriptures}.`,
       },
     ]
 

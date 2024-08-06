@@ -17,3 +17,4 @@
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+Route.post('/webhook/whatsapp', 'WhatsAppController.webhook')

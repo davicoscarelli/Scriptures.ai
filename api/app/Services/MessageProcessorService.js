@@ -1,4 +1,5 @@
 const ChatGPTService = use('App/Services/ChatGPTService')
+const WhatsAppService = use('App/Services/WhatsAppService')
 const Logger = use('Logger')
 
 // Simple in-memory store for user states and details (for prototyping)
@@ -56,6 +57,7 @@ class MessageProcessorService {
       if (userState === 'awaiting_scriptures') {
         this.setUserDetail(from, 'scriptures', message)
         this.setUserState(from, 'idle')
+        await WhatsAppService.sendMessage(from, "I'm now creating your sermon draft. Please wait a moment.")
 
         const { topic, theme, scriptures } = userDetails[from]
         const sermonDraft = await ChatGPTService.createSermonDraft(topic, theme, scriptures)

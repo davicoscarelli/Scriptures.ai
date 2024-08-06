@@ -3,6 +3,7 @@ const MessageProcessorService = use('App/Services/MessageProcessorService')
 
 class WhatsAppController {
   async webhook({ request, response }) {
+    console.log("AAAAA")
     const incomingMessage = request.input('Body')
     const from = request.input('From').replace('whatsapp:', '')
 

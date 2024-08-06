@@ -13,7 +13,7 @@ class ChatGPTService {
       },
       {
         role: 'user',
-        content: `Create a sermon on the topic "${topic}" with the theme "${theme}". Include the following scriptures: ${scriptures}.`,
+        content: `Create a sermonunder 1600 characters on the topic "${topic}" with the theme "${theme}". Include the following scriptures: ${scriptures}.`,
       },
     ]
 
@@ -21,6 +21,7 @@ class ChatGPTService {
       model: 'gpt-4o-mini',
       messages: messages,
       temperature: 1,
+      max_tokens: 1600,
       top_p: 1,
       frequency_penalty: 0,
       presence_penalty: 0,

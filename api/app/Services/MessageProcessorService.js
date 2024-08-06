@@ -57,7 +57,6 @@ class MessageProcessorService {
       if (userState === 'awaiting_scriptures') {
         this.setUserDetail(from, 'scriptures', message)
         this.setUserState(from, 'idle')
-        await WhatsAppService.sendMessage(from, "I'm now creating your sermon draft. Please wait a moment.")
 
         const { topic, theme, scriptures } = userDetails[from]
         const sermonDraft = await ChatGPTService.createSermonDraft(topic, theme, scriptures)

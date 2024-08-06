@@ -1,5 +1,5 @@
-const WhatsAppService = use('App/Services/WhatsAppService')
-const MessageProcessorService = use('App/Services/MessageProcessorService')
+// const WhatsAppService = use('App/Services/WhatsAppService')
+// const MessageProcessorService = use('App/Services/MessageProcessorService')
 const Logger = use('Logger')
 
 class WhatsAppController {

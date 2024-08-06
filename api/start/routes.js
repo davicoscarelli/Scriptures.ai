@@ -16,8 +16,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.on('/').render('welcome')
-Route.post('/webhook/whatsapp', 'Whatsapp/WhatsAppController.webhook')
 
 Route.group(() => {
     Route.post('whatsapp', 'Whatsapp/WhatsAppController.webhook').as('whatsapp.webhook')

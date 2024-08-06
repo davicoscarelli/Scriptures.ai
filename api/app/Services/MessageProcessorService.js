@@ -64,7 +64,8 @@ class MessageProcessorService {
         const { topic, theme, scriptures } = userDetails[from]
         const sermonDraft = await ChatGPTService.createSermonDraft(topic, theme, scriptures)
         const cleanedDraft = sermonDraft.replace(/\*\*/g, '*');
-        return `Aqui está o esboço do devocional \n\n${cleanedDraft}`;
+        const constrainedDraft = cleanedDraft.slice(0, 1600);
+        return `Aqui está o esboço do devocional \n\n${constrainedDraft}`;
       }
 
       return 'Comece por escrever "menu".'

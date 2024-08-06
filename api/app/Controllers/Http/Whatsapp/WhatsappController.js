@@ -5,7 +5,7 @@ const Logger = use('Logger')
 class WhatsAppController {
   async webhook({ request, response }) {
     try {
-        console.log("AAAAAAA ENTROUUU")
+        console.log("AAAAAAA ENTROUUUu")
     //   const incomingMessage = request.input('Body')
     //   const from = request.input('From').replace('whatsapp:', '')
 

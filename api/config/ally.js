@@ -1,4 +1,4 @@
-const { defineConfig } = require('@adonisjs/ally')
+const { defineConfig } = use('@adonisjs/ally')
 
 module.exports = defineConfig({
   google: {

@@ -24,6 +24,7 @@ class AuthController {
     const dbUser = await User.findOrCreate(
       { email: user.getEmail() },
       {
+        email: user.getEmail(),
         username: username,
         avatar: user.getAvatar(),
         password: null 

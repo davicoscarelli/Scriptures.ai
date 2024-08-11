@@ -23,7 +23,7 @@ class AuthController {
 
     // Find or create a user in the database
     const dbUser = await User.findOrCreate(
-      { email: user.getEmail() },
+      { google_id: user.getId() },
       {
         email: user.getEmail(),
         username: username,

@@ -10,13 +10,14 @@ const userDetails = {}
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
     try {
-      console.log("AAAAAAA USEERRRR", auth.getUser(), auth.user)
-      if (!auth.getUser()) {
+      let user = await auth.getUser()
+      console.log("AAAAAAA USEERRRR", user)
+      if (!user) {
         return 'Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect'
       }
 
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
-        return this.getMenu(auth)
+        return this.getMenu(user)
       }
 
       if (this.isAwaitingDetails(from)) {
@@ -29,15 +30,14 @@ class MessageProcessorService {
         return 'Indique o tema do seu devocional '
       }
 
-      return this.getMenu(auth)
+      return this.getMenu(user)
     } catch (error) {
       Logger.error('Error in MessageProcessorService processMessage: %j', error)
       return 'Ocorreu um erro ao processar o seu pedido. Por favor, tente novamente.'
     }
   }
 
-  static getMenu(auth) {
-    let user = auth.getUser()
+  static getMenu(user) {
     let username = user.username
     return `Bem-vindo(a) ao Devocional Bot, ${username}!\n\nPor favor, escolha uma opção:\n1. Esboço de Devocional\n\nDigite o número de sua escolha.`
   }

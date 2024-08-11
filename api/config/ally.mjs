@@ -1,4 +1,4 @@
-import { defineConfig, services } from '@adonisjs/ally/build/src/AllyManager'
+import { defineConfig } from '@adonisjs/ally'
 
 module.exports = defineConfig({
   google: {

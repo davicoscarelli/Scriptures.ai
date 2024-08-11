@@ -10,6 +10,9 @@ const userDetails = {}
 class MessageProcessorService {
   static async processMessage(from, message) {
     try {
+      if (message.toLowerCase() === 'login') {
+        return 'Por favor, faça login no site para usar o bot. \n\nhttps://scriptures-ai-6c1591cb87ac.herokuapp.com/v1/google/redirect'
+      }
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
         return this.getMenu()
       }

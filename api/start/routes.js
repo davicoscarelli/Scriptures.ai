@@ -21,3 +21,11 @@ Route.group(() => {
     Route.post('whatsapp', 'Sermon/WhatsAppController.webhook').as('whatsapp.webhook')
 
 }).prefix("v1/webhook")
+
+Route.group(() => {
+    Route.get('redirect', 'Auth/AuthController.redirectToGoogle').as('google.redirect')
+    Route.get('callback', 'Auth/AuthController.handleGoogleCallback').as('google.callback')
+
+}).prefix("v1/google")
+
+

@@ -18,15 +18,17 @@ class AuthController {
 
     // Find or create a user in the database
     const dbUser = await User.findOrCreate(
-      { email: user.email },
+      { email: user.getEmail() },
       {
-        username: user.name,
-        // avatarUrl: user.avatarUrl,
+        username: user.getName(),
+        avatar: user.getAvatar(),
       }
     )
 
     // Log the user in
-    await auth.login(dbUser)
+    const logged_user = await auth.login(dbUser)
+
+    console.log("LOGGED USER", logged_user)
 
     return response.send('Logged in successfully')
   }

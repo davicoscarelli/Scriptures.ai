@@ -10,6 +10,7 @@ const userDetails = {}
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
     try {
+      console.log("AAAAAAA USEERRRR", auth.getUser(), auth.user)
       if (!auth.getUser()) {
         return 'Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect'
       }

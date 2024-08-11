@@ -2,11 +2,11 @@ const User = use('App/Models/User')
 
 class AuthController {
   async redirectToGoogle({ ally }) {
-    return ally.require('google').getRedirectUrl()
+    return ally.driver('google').getRedirectUrl()
   }
 
   async handleGoogleCallback({ ally, auth, response }) {
-    const google = ally.require('google')
+    const google = ally.driver('google')
 
     if (google.accessDenied()) {
       return response.send('Access was denied')

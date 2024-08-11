@@ -3,19 +3,17 @@ const WhatsAppService = use('App/Services/WhatsAppService')
 
 const Logger = use('Logger')
 
-const auth = use('auth')
-
 // Simple in-memory store for user states and details (for prototyping)
 const userStates = {}
 const userDetails = {}
 
 class MessageProcessorService {
-  static async processMessage(from, message) {
+  static async processMessage(from, message, auth) {
     try {
       if (!auth.user) {
         return 'Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect'
       }
-      
+
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
         return this.getMenu()
       }

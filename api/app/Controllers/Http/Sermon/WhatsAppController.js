@@ -3,14 +3,14 @@ const MessageProcessorService = use('App/Services/MessageProcessorService')
 const Logger = use('Logger')
 
 class WhatsAppController {
-  async webhook({ request, response }) {
+  async webhook({ request, response, auth }) {
     try {
         console.log("AAAAAAA ENTROUUUu")
       const incomingMessage = request.input('Body')
       const from = request.input('From').replace('whatsapp:', '')
 
       // Process the incoming message
-      const reply = await MessageProcessorService.processMessage(from, incomingMessage)
+      const reply = await MessageProcessorService.processMessage(from, incomingMessage, auth)
 
       // Send the response back to the user
 

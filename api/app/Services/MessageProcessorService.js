@@ -15,7 +15,7 @@ class MessageProcessorService {
       }
 
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
-        return this.getMenu()
+        return this.getMenu(auth)
       }
 
       if (this.isAwaitingDetails(from)) {
@@ -28,15 +28,17 @@ class MessageProcessorService {
         return 'Indique o tema do seu devocional '
       }
 
-      return this.getMenu()
+      return this.getMenu(auth)
     } catch (error) {
       Logger.error('Error in MessageProcessorService processMessage: %j', error)
       return 'Ocorreu um erro ao processar o seu pedido. Por favor, tente novamente.'
     }
   }
 
-  static getMenu() {
-    return 'Bem-vindo ao Devocional Bot!\n\nPor favor, escolha uma opção:\n1. Esboço de Devocional\n\nDigite o número de sua escolha.'
+  static getMenu(auth) {
+    let user = auth.getUser()
+    let username = user.username
+    return `Bem-vindo(a) ao Devocional Bot, ${username}!\n\nPor favor, escolha uma opção:\n1. Esboço de Devocional\n\nDigite o número de sua escolha.`
   }
 
   static isAwaitingDetails(from) {

@@ -2,7 +2,7 @@ const User = use('App/Models/User')
 
 class AuthController {
   async redirectToGoogle({ ally }) {
-    return ally.driver('google').getRedirectUrl()
+    return ally.use('google').getRedirectUrl()
   }
 
   async handleGoogleCallback({ ally, auth, response }) {

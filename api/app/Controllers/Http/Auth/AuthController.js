@@ -11,17 +11,11 @@ class AuthController {
   async handleGoogleCallback({ ally, auth, response }) {
     const google = ally.driver('google')
 
-    if (google.accessDenied()) {
-      return response.send('Access was denied')
-    }
-
-    if (google.stateMisMatch()) {
+    
+    if (google.invalidState()) {
       return response.send('Request expired. Try again')
     }
 
-    if (google.hasError()) {
-      return response.send(google.getError())
-    }
 
     const user = await google.user()
 

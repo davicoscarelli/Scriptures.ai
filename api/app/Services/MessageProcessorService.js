@@ -10,6 +10,7 @@ const userDetails = {}
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
     try {
+      console.log(auth)
       let user = await auth.getUser()
       console.log("AAAAAAA USEERRRR", user)
       if (!user) {
@@ -32,6 +33,7 @@ class MessageProcessorService {
 
       return this.getMenu(user)
     } catch (error) {
+      console.log("AAAAA", error)
       Logger.error('Error in MessageProcessorService processMessage: %j', error)
       return 'Ocorreu um erro ao processar o seu pedido. Por favor, tente novamente.'
     }

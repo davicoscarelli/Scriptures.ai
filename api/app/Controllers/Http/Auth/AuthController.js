@@ -36,7 +36,7 @@ class AuthController {
 
     console.log("LOGGED USER", logged_user)
 
-    return response.send('Logged in successfully')
+    return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&type=phone_number&app_absent=0')
   }
 }
 

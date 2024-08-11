@@ -11,19 +11,14 @@ class AuthController {
   async handleGoogleCallback({ ally, auth, response }) {
     const google = ally.driver('google')
 
-    
-    if (google.invalidState()) {
-      return response.send('Request expired. Try again')
-    }
 
-
-    const user = await google.user()
+    const user = await google.getUser()
 
     // Find or create a user in the database
     const dbUser = await User.findOrCreate(
       { email: user.email },
       {
-        username: user.username,
+        username: user.name,
         // avatarUrl: user.avatarUrl,
       }
     )

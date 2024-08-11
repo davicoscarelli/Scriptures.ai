@@ -1,5 +1,6 @@
 const User = use('App/Models/User')
 
+
 class AuthController {
   async redirectToGoogle({ ally }) {
     return ally.driver('google').redirect((request) => {
@@ -36,8 +37,9 @@ class AuthController {
 
     console.log("LOGGED USER", logged_user)
 
-    return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&type=phone_number&app_absent=0')
+    return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&text=start&type=phone_number&app_absent=0')
   }
 }
+
 
 module.exports = AuthController

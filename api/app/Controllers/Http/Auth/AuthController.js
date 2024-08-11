@@ -16,12 +16,17 @@ class AuthController {
 
     console.log("AEEEE CARAIOOO", user)
 
+    const username = user.getEmail().split('@')[0]
+
+    console.log(username)
+
     // Find or create a user in the database
     const dbUser = await User.findOrCreate(
       { email: user.getEmail() },
       {
-        username: user.getName(),
+        username: username,
         avatar: user.getAvatar(),
+        password: null 
       }
     )
 

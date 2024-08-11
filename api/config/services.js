@@ -44,7 +44,7 @@ module.exports = {
     google: {
       clientId: Env.get('GOOGLE_CLIENT_ID'),
       clientSecret: Env.get('GOOGLE_CLIENT_SECRET'),
-      redirectUri: `${Env.get('APP_URL')}/google/callback`
+      redirectUri: `https://www.scriptures.pro/v1/google/callback`
     },
 
     /*

@@ -59,7 +59,7 @@ class AuthController {
     await WhatsAppService.sendMessage(phone, `Your OTP is: ${otp}`)
 
     // Render the OTP verification page
-    return view.render('otp_verification', { phone, user_id })
+    return view.render('otp_verification', { phone_number, user_id })
   }
 
   async verifyOTP({ request, response, auth }) {

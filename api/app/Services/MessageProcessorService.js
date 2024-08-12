@@ -1,7 +1,8 @@
 const ChatGPTService = use('App/Services/ChatGPTService')
 const WhatsAppService = use('App/Services/WhatsAppService')
 const User = use('App/Models/User')
-
+const { v4: uuidv4 } = require('uuid')
+const TempToken = use('App/Models/TempToken')
 const Logger = use('Logger')
 
 // Simple in-memory store for user states and details (for prototyping)
@@ -10,14 +11,28 @@ const userDetails = {}
 
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
-    let test = await auth.getUser()
-    console.log("AAAAA", test)
     try {
+
+      if (message.toLowerCase() === 'logout') {
+        await auth.logout()
+        return 'Você foi desconectado com sucesso. Para usar o bot novamente, faça login.'
+      }
+
       console.log("AAAAA", from, message)
       let user = await User.findBy('phone_number', from)
       console.log("AAAAA USER FOUND", user)
       if (!user || message.toLowerCase() === 'login') {
-        return `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?phone_number=${from}`
+        // Generate a temporary token
+        const tempToken = uuidv4()
+
+        // Store the token and phone number in the database
+        await TempToken.create({
+          phone_number: from,
+          token: tempToken,
+        })
+
+        // Redirect the user to Google login with the token as a query parameter
+        return `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?t=${tempToken}`
       }
 
       await auth.login(user)

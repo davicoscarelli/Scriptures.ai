@@ -15,8 +15,9 @@ class AuthController {
 
     const user = await google.getUser()
 
-    const phoneNumber = request.input('phone_number')
-    console.log("PHONE NUMBER", phoneNumber)
+    const tempToken = request.input('token')
+    console.log("TEMP TOKEN", tempToken)
+
 
     console.log("AEEEE CARAIOOO", user)
 

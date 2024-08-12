@@ -9,11 +9,14 @@ class AuthController {
     })
   }
 
-  async handleGoogleCallback({ ally, auth, response }) {
+  async handleGoogleCallback({ ally, auth, response, request }) {
     const google = ally.driver('google')
 
 
     const user = await google.getUser()
+
+    const phoneNumber = request.input('phone_number')
+    console.log("PHONE NUMBER", phoneNumber)
 
     console.log("AEEEE CARAIOOO", user)
 
@@ -28,7 +31,8 @@ class AuthController {
         email: user.getEmail(),
         username: username,
         avatar: user.getAvatar(),
-        password: null 
+        password: null ,
+        phone_number: phoneNumber
       }
     )
 

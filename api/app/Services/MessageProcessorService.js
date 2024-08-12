@@ -1,5 +1,6 @@
 const ChatGPTService = use('App/Services/ChatGPTService')
 const WhatsAppService = use('App/Services/WhatsAppService')
+const User = use('App/Models/User')
 
 const Logger = use('Logger')
 
@@ -8,14 +9,14 @@ const userStates = {}
 const userDetails = {}
 
 class MessageProcessorService {
-  static async processMessage(from, message, auth) {
+  static async processMessage(from, message) {
     try {
-      console.log(auth)
-      let user = await auth.getUser()
-      console.log("AAAAAAA USEERRRR", user)
-      if (!user) {
-        return 'Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect'
+      let user = await User.findBy('phone_number', from)
+      if (!user || message.toLowerCase() === 'login') {
+        `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?phone_number=${from}`
       }
+
+      await auth.login(user)
 
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
         return this.getMenu(user)

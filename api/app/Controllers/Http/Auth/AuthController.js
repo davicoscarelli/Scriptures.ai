@@ -48,6 +48,7 @@ class AuthController {
 
   async verifyNumber({ request, response, view }) {
     const { phone_number, user_id } = request.only(['phone_number', 'user_id'])
+    console.log("PHONE NUMBER", phone_number, user_id)
 
     // Generate OTP and store it in the database
     const otp = OTPService.generateOTP()
@@ -82,7 +83,7 @@ class AuthController {
     await user.save()
 
     // Log the user in
-    await auth.login(user)
+    // await auth.login(user)
 
     // Delete the OTP after use
     await OTPService.deleteOTP(phone_number)

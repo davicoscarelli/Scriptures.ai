@@ -2,11 +2,14 @@ const User = use('App/Models/User')
 
 
 class AuthController {
-  async redirectToGoogle({ ally }) {
-    return ally.driver('google').redirect((request) => {
-      request.param('access_type', 'offline')
-      request.param('prompt', 'select_account')
-    })
+  async redirectToGoogle({ ally, request }) {
+    const phoneNumber = request.input('phone_number')
+
+  return ally.driver('google').redirect((request) => {
+    request.state(phoneNumber) 
+    request.param('access_type', 'offline')
+    request.param('prompt', 'select_account')
+  })
   }
 
   async handleGoogleCallback({ ally, auth, response, request }) {
@@ -16,7 +19,7 @@ class AuthController {
 
     const user = await google.getUser()
 
-    const phoneNumber = request.input('phone_number')
+    const phoneNumber = google.state()
     console.log("PHONE NUMBER", phoneNumber)
 
     console.log("AEEEE CARAIOOO", user)

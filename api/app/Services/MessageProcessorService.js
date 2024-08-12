@@ -1,3 +1,5 @@
+const Auth = use('App/Controllers/Http/Auth/AuthController')
+
 const ChatGPTService = use('App/Services/ChatGPTService')
 const WhatsAppService = use('App/Services/WhatsAppService')
 const User = use('App/Models/User')
@@ -11,6 +13,7 @@ const userDetails = {}
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
     try {
+
       console.log("AAAAA", from, message)
       let user = await User.findBy('phone_number', from)
       console.log("AAAAA USER FOUND", user)

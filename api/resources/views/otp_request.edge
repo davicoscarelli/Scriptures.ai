@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Your Number</title>
+  {{ style('style') }}
+</head>
+<body>
+  <h1 style="padding-top: 5rem;">Welcome {{ username }}!</h1>
+  <h3 style="padding: 2rem 0; opacity: 0.3;">Let's finish setting up your account!</h3>
+  <div class="container">
+    <h3 class="title">Please verify your number</h3>
+    <p class="sub-title">
+      Enter your WhatsApp number with country code to receive an OTP
+    </p>
+    <form method="POST" action="/verify-number">
+      <input type="hidden" name="user_id" value="{{ user_id }}">
+      <input type="number" name="phone_number" class="number" placeholder="+55123456789101" maxlength="20" required>
+      <button type="submit" class="send">
+        Send OTP
+      </button>
+    </form>
+  </div>
+</body>
+</html>

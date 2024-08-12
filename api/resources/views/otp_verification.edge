@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Verification</title>
+  {{ style('style') }}
+</head>
+<body>
+  <h1 style="padding-top: 5rem;">Welcome {{ username }}!</h1>
+  <h3 style="padding: 2rem 0; opacity: 0.3;">Let's finish setting up your account!</h3>
+  <div class="container">
+    <h3 class="title">OTP Verification</h3>
+    <p class="sub-title">
+      Enter the OTP you received to
+      <span class="phone-number">{{ phone_number }}</span>
+    </p>
+    <form method="POST" action="/verify-otp" id="otpForm">
+      <input type="hidden" name="user_id" value="{{ user_id }}">
+      <input type="hidden" name="phone_number" value="{{ phone_number }}">
+      <div class="wrapper">
+        <input type="text" name="digit1" class="field 1" maxlength="1" required>
+        <input type="text" name="digit2" class="field 2" maxlength="1" required>
+        <input type="text" name="digit3" class="field 3" maxlength="1" required>
+        <input type="text" name="digit4" class="field 4" maxlength="1" required>
+      </div>
+    </form>
+    <button class="resend">
+      Resend OTP
+    </button>
+  </div>
+
+  <script>
+    const inputFields = document.querySelectorAll("input.field");
+
+    inputFields.forEach((field, index) => {
+      field.addEventListener("input", (e) => handleInput(e, index));
+    });
+
+    function handleInput(e, index) {
+      const inputField = e.target;
+
+      // Move to the next field if current field is filled
+      if (inputField.value.length >= 1) {
+        const nextField = inputField.nextElementSibling;
+        if (nextField) {
+          nextField.focus();
+        } else {
+          // If last field is filled, submit the form
+          const otpForm = document.getElementById("otpForm");
+          otpForm.submit();
+        }
+      }
+    }
+  </script>
+</body>
+</html>

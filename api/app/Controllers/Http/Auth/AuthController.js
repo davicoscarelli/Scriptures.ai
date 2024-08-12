@@ -59,7 +59,13 @@ class AuthController {
   }
 
   async verifyOTP({ request, response, auth }) {
-    const { user_id, phone_number, otp } = request.only(['user_id', 'phone_number', 'otp'])
+    const { user_id, phone_number } = request.only(['user_id', 'phone_number']);
+    const otp = [
+      request.input('digit1'),
+      request.input('digit2'),
+      request.input('digit3'),
+      request.input('digit4')
+    ].join('');
 
     // Validate OTP
     const isValid = await OTPService.validateOTP(phone_number, otp)

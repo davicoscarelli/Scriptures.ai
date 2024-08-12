@@ -71,8 +71,11 @@ class AuthController {
       request.input('digit4')
     ].join('');
 
+    console.log("VALIDATE OTP", phone, otp)
+    let phone = '+55' + phone_number
+
     // Validate OTP
-    const isValid = await OTPService.validateOTP(phone_number, otp)
+    const isValid = await OTPService.validateOTP(phone, otp)
 
     if (!isValid) {
       return response.send('Invalid OTP. Please try again.')
@@ -80,14 +83,14 @@ class AuthController {
 
     // Update the user's phone number and complete registration
     const user = await User.find(user_id)
-    user.phone_number = phone_number
+    user.phone_number = phone
     await user.save()
 
     // Log the user in
     // await auth.login(user)
 
     // Delete the OTP after use
-    await OTPService.deleteOTP(phone_number)
+    await OTPService.deleteOTP(phone)
 
     // Redirect back to WhatsApp
     return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&text=start&type=phone_number&app_absent=0')

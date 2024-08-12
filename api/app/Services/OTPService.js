@@ -14,9 +14,11 @@ class OTPService {
   }
 
   static async validateOTP(phoneNumber, otp) {
+    console.log("CARAIOOOOO", phoneNumber, otp)
     // Find the OTP by phone number
     const record = await TempToken.query().where('phone_number', phoneNumber).orderBy('created_at', 'desc').first()
 
+    console.log(record)
     if (!record) {
       return false
     }

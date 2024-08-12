@@ -47,19 +47,19 @@ class AuthController {
   }
 
   async verifyNumber({ request, response, view }) {
-    const { phone, user_id } = request.only(['phone_number', 'user_id'])
-    let phone_number = '+55 ' + phone
-    console.log("PHONE NUMBER", phone_number, user_id)
+    const { phone_number, user_id } = request.only(['phone_number', 'user_id'])
+    let phone = '+55 ' + phone_number
+    console.log("PHONE NUMBER", phone, user_id)
 
     // Generate OTP and store it in the database
     const otp = OTPService.generateOTP()
-    await OTPService.storeOTP(phone_number, otp)
+    await OTPService.storeOTP(phone, otp)
 
     // Send the OTP via WhatsApp
-    await WhatsAppService.sendMessage(phone_number, `Your OTP is: ${otp}`)
+    await WhatsAppService.sendMessage(phone, `Your OTP is: ${otp}`)
 
     // Render the OTP verification page
-    return view.render('otp_verification', { phone_number, user_id })
+    return view.render('otp_verification', { phone, user_id })
   }
 
   async verifyOTP({ request, response, auth }) {

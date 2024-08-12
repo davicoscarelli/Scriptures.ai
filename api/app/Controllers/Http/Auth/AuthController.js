@@ -31,6 +31,7 @@ class AuthController {
         username: username,
         avatar: user.getAvatar(),
         password: null,
+        google_id: user.getId()
       }
     )
 

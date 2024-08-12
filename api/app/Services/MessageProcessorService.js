@@ -1,4 +1,3 @@
-const Auth = use('App/Controllers/Http/Auth/AuthController')
 
 const ChatGPTService = use('App/Services/ChatGPTService')
 const WhatsAppService = use('App/Services/WhatsAppService')

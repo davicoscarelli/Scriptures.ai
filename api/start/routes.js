@@ -29,9 +29,9 @@ Route.group(() => {
 }).prefix("v1/google")
 
 // Route for handling the OTP request (when user submits their phone number)
-Route.post('/verify-number', 'AuthController.verifyNumber')
+Route.post('/verify-number', 'Auth/AuthController.verifyNumber')
 
 // Route for handling the OTP verification (when user submits the OTP)
-Route.post('/verify-otp', 'AuthController.verifyOTP')
+Route.post('/verify-otp', 'Auth/AuthController.verifyOTP')
 
 

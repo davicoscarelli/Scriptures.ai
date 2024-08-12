@@ -15,7 +15,7 @@ class MessageProcessorService {
       let user = await User.findBy('phone_number', from)
       console.log("AAAAA USER FOUND", user)
       if (!user || message.toLowerCase() === 'login') {
-        `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?phone_number=${from}`
+        return `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?phone_number=${from}`
       }
 
       await auth.login(user)

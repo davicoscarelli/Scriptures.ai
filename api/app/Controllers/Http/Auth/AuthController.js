@@ -1,5 +1,6 @@
 const User = use('App/Models/User')
 const OTPService = use('App/Services/OTPService') 
+const WhatsAppService = use('App/Services/WhatsAppService')
 
 class AuthController {
   async redirectToGoogle({ ally, request }) {

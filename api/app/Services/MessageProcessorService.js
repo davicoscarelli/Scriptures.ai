@@ -9,7 +9,7 @@ const userStates = {}
 const userDetails = {}
 
 class MessageProcessorService {
-  static async processMessage(from, message) {
+  static async processMessage(from, message, auth) {
     try {
       let user = await User.findBy('phone_number', from)
       if (!user || message.toLowerCase() === 'login') {

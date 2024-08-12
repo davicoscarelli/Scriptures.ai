@@ -14,13 +14,12 @@ class MessageProcessorService {
     try {
 
       console.log("AAAAA", from, message)
-      let user = await User.findBy('phone_number', from)
+      let phone_number = from.replace('+', '')
+      let user = await User.findBy('phone_number', phone_number)
       console.log("AAAAA USER FOUND", user)
       if (!user || message.toLowerCase() === 'login') {
         return `Por favor, faça login no site para usar o bot. \n\nhttps://www.scriptures.pro/v1/google/redirect?phone_number=${from}`
       }
-
-      await auth.login(user)
 
       if (message.toLowerCase() === 'menu' || message.toLowerCase() === 'start') {
         return this.getMenu(user)

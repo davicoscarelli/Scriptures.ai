@@ -10,7 +10,7 @@ class WhatsAppService {
       body,
       from: process.env.TWILIO_WHATSAPP_NUMBER,
       to: `whatsapp:${to}`
-    })
+    }).then(message => console.log("AAAAAA", message.sid))
   }
 }
 

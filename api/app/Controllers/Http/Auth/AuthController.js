@@ -12,7 +12,7 @@ class AuthController {
   })
   }
 
-  async handleGoogleCallback({ ally, auth, response, request }) {
+  async handleGoogleCallback({ ally, auth, response, request, view }) {
     console.log("ENTROU NO CALLBACK", request.all(), request)
     const google = ally.driver('google')
 

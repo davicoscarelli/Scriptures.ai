@@ -48,7 +48,7 @@ class AuthController {
 
   async verifyNumber({ request, response, view }) {
     const { phone_number, user_id } = request.only(['phone_number', 'user_id'])
-    let phone = '+55 ' + phone_number
+    let phone = '+55' + phone_number
     console.log("PHONE NUMBER", phone, user_id)
 
     // Generate OTP and store it in the database
@@ -100,3 +100,4 @@ class AuthController {
 
 
 module.exports = AuthController
+

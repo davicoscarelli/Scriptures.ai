@@ -10,14 +10,14 @@ class AuthController {
   }
 
   async handleGoogleCallback({ ally, auth, response, request }) {
+    console.log("ENTROU NO CALLBACK", request.all(), request)
     const google = ally.driver('google')
 
 
     const user = await google.getUser()
 
-    const phone = request.input('phone_number')
-    console.log("NUMBERRR", phone)
-
+    const phoneNumber = request.input('phone_number')
+    console.log("PHONE NUMBER", phoneNumber)
 
     console.log("AEEEE CARAIOOO", user)
 
@@ -43,6 +43,10 @@ class AuthController {
     console.log("LOGGED USER", logged_user)
 
     return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&text=start&type=phone_number&app_absent=0')
+  }
+
+  async me({ auth }) {
+    return auth.getUser()
   }
 }
 

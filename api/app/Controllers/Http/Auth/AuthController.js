@@ -47,9 +47,11 @@ class AuthController {
   async verifyNumber({ request, response, view }) {
     const { phone_number, user_id } = request.only(['phone_number', 'user_id'])
 
-    // Generate OTP and send via WhatsApp
+    // Generate OTP and store it in the database
     const otp = OTPService.generateOTP()
-    await OTPService.storeOTP(user_id, otp) // Store OTP in the database
+    await OTPService.storeOTP(phone_number, otp)
+
+    // Send the OTP via WhatsApp
     await WhatsAppService.sendMessage(phone_number, `Your OTP is: ${otp}`)
 
     // Render the OTP verification page
@@ -57,29 +59,26 @@ class AuthController {
   }
 
   async verifyOTP({ request, response, auth }) {
-    const { user_id, phone_number } = request.only(['user_id', 'phone_number']);
-    const otp = [
-      request.input('digit1'),
-      request.input('digit2'),
-      request.input('digit3'),
-      request.input('digit4')
-    ].join(''); // Combine the digits into a full OTP
-  
+    const { user_id, phone_number, otp } = request.only(['user_id', 'phone_number', 'otp'])
+
     // Validate OTP
-    const isValid = await OTPService.validateOTP(user_id, otp);
-  
+    const isValid = await OTPService.validateOTP(phone_number, otp)
+
     if (!isValid) {
-      return response.send('Invalid OTP. Please try again.');
+      return response.send('Invalid OTP. Please try again.')
     }
-  
+
     // Update the user's phone number and complete registration
-    const user = await User.find(user_id);
-    user.phone_number = phone_number;
-    await user.save();
-  
+    const user = await User.find(user_id)
+    user.phone_number = phone_number
+    await user.save()
+
     // Log the user in
-    await auth.login(user);
-  
+    await auth.login(user)
+
+    // Delete the OTP after use
+    await OTPService.deleteOTP(phone_number)
+
     // Redirect back to WhatsApp
     return response.redirect('https://api.whatsapp.com/send/?phone=+14155238886&text=start&type=phone_number&app_absent=0')
 }

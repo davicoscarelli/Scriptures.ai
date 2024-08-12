@@ -1,18 +1,33 @@
-const crypto = require('crypto')
-const Cache = use('Cache') // Assuming you're using a cache system
+const TempToken = use('App/Models/TempToken')
 
 class OTPService {
   static generateOTP() {
-    return crypto.randomInt(1000, 9999).toString()
+    return Math.floor(1000 + Math.random() * 9000).toString()
   }
 
-  static async storeOTP(userId, otp) {
-    await Cache.put(`otp_${userId}`, otp, 10 * 60) // Store OTP for 10 minutes
+  static async storeOTP(phoneNumber, otp) {
+    // Store the OTP with the phone number in the temp_tokens table
+    await TempToken.create({
+      phone_number: phoneNumber,
+      token: otp,
+    })
   }
 
-  static async validateOTP(userId, otp) {
-    const storedOtp = await Cache.get(`otp_${userId}`)
-    return storedOtp === otp
+  static async validateOTP(phoneNumber, otp) {
+    // Find the OTP by phone number
+    const record = await TempToken.query().where('phone_number', phoneNumber).orderBy('created_at', 'desc').first()
+
+    if (!record) {
+      return false
+    }
+
+    // Check if the OTP matches
+    return record.token === otp
+  }
+
+  static async deleteOTP(phoneNumber) {
+    // Delete the OTP after it's used
+    await TempToken.query().where('phone_number', phoneNumber).delete()
   }
 }
 

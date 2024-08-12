@@ -71,8 +71,9 @@ class AuthController {
       request.input('digit4')
     ].join('');
 
-    console.log("VALIDATE OTP", phone, otp)
     let phone = '+55' + phone_number
+    console.log("VALIDATE OTP", phone, otp)
+
 
     // Validate OTP
     const isValid = await OTPService.validateOTP(phone, otp)

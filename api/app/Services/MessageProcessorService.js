@@ -10,6 +10,8 @@ const userDetails = {}
 
 class MessageProcessorService {
   static async processMessage(from, message, auth) {
+    let test = await auth.getUser()
+    console.log("AAAAA", test)
     try {
       console.log("AAAAA", from, message)
       let user = await User.findBy('phone_number', from)
